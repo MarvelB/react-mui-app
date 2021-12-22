@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route caseSensitive path='/' element={<Notes />} />
+        <Route path='/' element={<Notes />} />
         <Route path='/create' element={<Create />} />
       </Routes>
     </Router>
