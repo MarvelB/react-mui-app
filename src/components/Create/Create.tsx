@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Create = () => {
   return (
@@ -19,24 +20,11 @@ const Create = () => {
         color="secondary"
         variant="contained"
         onClick={() => console.log('Clicked')}
+        endIcon={<KeyboardArrowRightIcon />}
       >
         Submit
       </Button>
 
-      {/* <Button
-        type="submit"
-      >Submit</Button>
-      <Button
-        type="submit"
-        color="secondary"
-        variant="outlined"
-      >Submit</Button>
-
-      <ButtonGroup color="secondary" variant="contained">
-        <Button>One</Button>
-        <Button>Two</Button>
-        <Button>Three</Button>
-      </ButtonGroup> */}
     </Container>
   )
 }
