@@ -1,8 +1,10 @@
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 
 const Create = () => {
   return (
-    <div>
+    <Container>
       <Typography
         variant="h6"
         component="h2"
@@ -11,7 +13,31 @@ const Create = () => {
       >
         Create a New Note
       </Typography>
-    </div>
+
+      <Button
+        type="submit"
+        color="secondary"
+        variant="contained"
+        onClick={() => console.log('Clicked')}
+      >
+        Submit
+      </Button>
+
+      {/* <Button
+        type="submit"
+      >Submit</Button>
+      <Button
+        type="submit"
+        color="secondary"
+        variant="outlined"
+      >Submit</Button>
+
+      <ButtonGroup color="secondary" variant="contained">
+        <Button>One</Button>
+        <Button>Two</Button>
+        <Button>Three</Button>
+      </ButtonGroup> */}
+    </Container>
   )
 }
 
