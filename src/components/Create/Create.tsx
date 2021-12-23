@@ -5,15 +5,20 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import { Note, NoteCategory } from '../../types/note.type';
 import { SxProps } from '@mui/system/styleFunctionSx';
 import { FormControl, FormLabel, FormControlLabel, Theme } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const classes = {
   field: {
     marginTop: 2,
     marginBottom: 2,
     display: 'block',
+  } as SxProps<Theme>,
+  formLabel: {
+    textTransform: 'capitalize',
   } as SxProps<Theme>,
 };
 
@@ -22,7 +27,8 @@ const Create = () => {
   const [details, setDetails] = useState<string>('');
   const [titleError, setTitleError] = useState<boolean>(false);
   const [detailsError, setDetailsError] = useState<boolean>(false);
-  const [category, setCategory] = useState<string>('todos');
+  const [category, setCategory] = useState<NoteCategory>(NoteCategory.TODOS);
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -40,7 +46,14 @@ const Create = () => {
     }
 
     if (title && details) {
-      console.log(title, details)
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category, details, title } as Partial<Note>)
+      })
+      .then(() => {
+        navigate('/');
+      })
     }
   }
 
@@ -86,11 +99,27 @@ const Create = () => {
 
         <FormControl sx={classes.field}>
           <FormLabel>Note Category</FormLabel>
-          <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
-            <FormControlLabel value="money" control={<Radio color="secondary" />} label="Money" />
-            <FormControlLabel value="todos" control={<Radio color="secondary" />} label="Todos" />
-            <FormControlLabel value="reminders" control={<Radio color="secondary" />} label="Reminders" />
-            <FormControlLabel value="work" control={<Radio color="secondary" />} label="Work" />
+          <RadioGroup value={category} onChange={(e) => setCategory(e.target.value as NoteCategory)}>
+            <FormControlLabel
+              value={NoteCategory.MONEY}
+              sx={classes.formLabel}
+              control={<Radio color="secondary" />}
+              label={NoteCategory.MONEY} />
+            <FormControlLabel
+              value={NoteCategory.TODOS}
+              sx={classes.formLabel}
+              control={<Radio color="secondary" />}
+              label={NoteCategory.TODOS} />
+            <FormControlLabel
+              value={NoteCategory.REMINDERS}
+              sx={classes.formLabel}
+              control={<Radio color="secondary" />}
+              label={NoteCategory.REMINDERS} />
+            <FormControlLabel
+              value={NoteCategory.WORK}
+              sx={classes.formLabel}
+              control={<Radio color="secondary" />}
+              label={NoteCategory.MONEY} />
           </RadioGroup>
         </FormControl>
 
