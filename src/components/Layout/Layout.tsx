@@ -3,15 +3,13 @@ import { Theme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Drawer from '@mui/material/Drawer';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
+import SubjectOutlined from '@mui/icons-material/SubjectOutlined';
+import AddCircleOutlined from '@mui/icons-material/AddCircleOutlined';
+import { useLocation, useNavigate } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -25,6 +23,9 @@ const classes = {
   } as SxProps<Theme>,
   root: {
     display: 'flex',
+  } as SxProps<Theme>,
+  active: {
+    background: '#f4f4f4',
   } as SxProps<Theme>,
 };
 
@@ -45,6 +46,22 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const menuItems = [
+    {
+      text: 'My Notes',
+      icon: <SubjectOutlined color="secondary" />,
+      path: '/',
+    },
+    {
+      text: 'Create Notes',
+      icon: <AddCircleOutlined color="secondary" />,
+      path: '/create',
+    }
+  ];
+
   return (
     <Typography
       component="div"
@@ -64,6 +81,20 @@ const Layout = ({ children }: LayoutProps) => {
               ninja notes
             </Typography>
           </div>
+
+          {/* list / Links */}
+          <List>
+            {menuItems.map(item => (
+              <ListItemButton
+                key={item.text}
+                onClick={() => navigate(item.path)}
+                sx={location.pathname === item.path ? classes.active : {}}
+              >
+                <ListItemIcon>{ item.icon }</ListItemIcon>
+                <ListItemText primary={ item.text } />
+              </ListItemButton>
+            ))}
+          </List>
         </Drawer>
       </ThemeProvider>
 
