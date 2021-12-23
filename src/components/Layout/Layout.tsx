@@ -10,6 +10,9 @@ import ListItemText from '@mui/material/ListItemText';
 import SubjectOutlined from '@mui/icons-material/SubjectOutlined';
 import AddCircleOutlined from '@mui/icons-material/AddCircleOutlined';
 import { useLocation, useNavigate } from 'react-router';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { format } from 'date-fns';
 
 const drawerWidth = 240;
 
@@ -30,6 +33,13 @@ const classes = {
   } as SxProps<Theme>,
   title: {
     padding: (theme) => theme.spacing(2),
+  } as SxProps<Theme>,
+  appbar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+  } as SxProps<Theme>,
+  toolbar: ((theme) => theme.mixins.toolbar) as SxProps<Theme>,
+  date: {
+    flexGrow: 1,
   } as SxProps<Theme>,
 };
 
@@ -72,8 +82,21 @@ const Layout = ({ children }: LayoutProps) => {
       sx={classes.root}
     >
       {/* app bar */}
+      <AppBar
+        sx={classes.appbar}
+        elevation={0}
+      >
+        <Toolbar>
+          <Typography sx={classes.date}>
+            Today is the { format(new Date(), 'do MMMM Y') }
+          </Typography>
+          <Typography>
+            Mario
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      
       {/* side drawer */}
-
       <ThemeProvider theme={drawerTheme}>
         <Drawer
           sx={classes.drawer}
@@ -106,6 +129,7 @@ const Layout = ({ children }: LayoutProps) => {
         component="div"
         sx={classes.page}
       >
+        <Typography component="div" sx={classes.toolbar}></Typography>
         { children }
       </Typography>
     </Typography>
