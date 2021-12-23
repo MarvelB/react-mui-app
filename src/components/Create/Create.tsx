@@ -3,8 +3,10 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import { SxProps } from '@mui/system/styleFunctionSx';
-import { Theme } from '@mui/material';
+import { FormControl, FormLabel, FormControlLabel, Theme } from '@mui/material';
 import { useState } from 'react';
 
 const classes = {
@@ -20,6 +22,7 @@ const Create = () => {
   const [details, setDetails] = useState<string>('');
   const [titleError, setTitleError] = useState<boolean>(false);
   const [detailsError, setDetailsError] = useState<boolean>(false);
+  const [category, setCategory] = useState<string>('todos');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -80,6 +83,16 @@ const Create = () => {
           rows={4}
           error={detailsError}
         />
+
+        <FormControl sx={classes.field}>
+          <FormLabel>Note Category</FormLabel>
+          <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+            <FormControlLabel value="money" control={<Radio color="secondary" />} label="Money" />
+            <FormControlLabel value="todos" control={<Radio color="secondary" />} label="Todos" />
+            <FormControlLabel value="reminders" control={<Radio color="secondary" />} label="Reminders" />
+            <FormControlLabel value="work" control={<Radio color="secondary" />} label="Work" />
+          </RadioGroup>
+        </FormControl>
 
         <Button
           type="submit"
