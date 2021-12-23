@@ -17,6 +17,7 @@ const classes = {
   page: {
     backgroundColor: '#f9f9f9',
     width: '100%',
+    padding: (theme) => theme.spacing(3),
   } as SxProps<Theme>,
   drawer: {
     width: drawerWidth,
@@ -26,6 +27,9 @@ const classes = {
   } as SxProps<Theme>,
   active: {
     background: '#f4f4f4',
+  } as SxProps<Theme>,
+  title: {
+    padding: (theme) => theme.spacing(2),
   } as SxProps<Theme>,
 };
 
@@ -77,7 +81,7 @@ const Layout = ({ children }: LayoutProps) => {
           anchor="left"
         >
           <div>
-            <Typography variant="h5">
+            <Typography variant="h5" sx={classes.title}>
               ninja notes
             </Typography>
           </div>
