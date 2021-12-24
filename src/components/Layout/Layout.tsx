@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from 'react-router';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { format } from 'date-fns';
+import Avatar from '@mui/material/Avatar';
 
 const drawerWidth = 240;
 
@@ -40,6 +41,9 @@ const classes = {
   toolbar: ((theme) => theme.mixins.toolbar) as SxProps<Theme>,
   date: {
     flexGrow: 1,
+  } as SxProps<Theme>,
+  avatar: {
+    marginLeft: (theme) => theme.spacing(2),
   } as SxProps<Theme>,
 };
 
@@ -93,6 +97,7 @@ const Layout = ({ children }: LayoutProps) => {
           <Typography>
             Mario
           </Typography>
+          <Avatar sx={classes.avatar} src="/mario-av.png" />
         </Toolbar>
       </AppBar>
       

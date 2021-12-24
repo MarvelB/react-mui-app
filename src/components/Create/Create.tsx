@@ -119,7 +119,7 @@ const Create = () => {
               value={NoteCategory.WORK}
               sx={classes.formLabel}
               control={<Radio color="secondary" />}
-              label={NoteCategory.MONEY} />
+              label={NoteCategory.WORK} />
           </RadioGroup>
         </FormControl>
 
