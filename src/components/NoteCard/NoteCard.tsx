@@ -31,11 +31,11 @@ const NoteCard = ({ note, handleDelete }: NoteCardProps) => {
                 backgroundColor: () => {
                   let colour = "";
             
-                  if (note.category == NoteCategory.WORK) {
+                  if (note.category === NoteCategory.WORK) {
                     colour = yellow[700];
-                  } else if (note.category == NoteCategory.MONEY) {
+                  } else if (note.category === NoteCategory.MONEY) {
                     colour = green[500];
-                  } else if (note.category == NoteCategory.TODOS) {
+                  } else if (note.category === NoteCategory.TODOS) {
                     colour = pink[500];
                   } else {
                     colour = blue[500];
